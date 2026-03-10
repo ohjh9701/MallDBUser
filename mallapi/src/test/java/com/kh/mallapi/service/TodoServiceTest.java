@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.kh.mallapi.dto.PageRequestDTO;
+import com.kh.mallapi.dto.PageResponseDTO;
 import com.kh.mallapi.dto.TodoDTO;
 
 import lombok.extern.log4j.Log4j2;
@@ -41,9 +43,18 @@ public class TodoServiceTest {
 		todoService.modify(todoDTO);
 	}
 	
-	@Test
+	//@Test
 	public void testRemove() {
 		Long tno = 101L;
 		todoService.remove(tno);
 	}
+	
+	@Test 
+	public void testList() { 
+	PageRequestDTO pageRequestDTO = PageRequestDTO.builder().page(2).size(10).build(); 
+	
+	PageResponseDTO<TodoDTO> response = todoService.list(pageRequestDTO); 
+	
+	log.info(response); 
+	} 
 }
